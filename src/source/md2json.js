@@ -85,11 +85,26 @@ function scanArea (mdLines) {
                 scanedLines.push(singleLine)
             }
         }
+        // else if(singleLine.length > 2 && /^(<|&#60;)(?!\!).+>*$/.test(singleLine)){
+        //     if(/^<\/.+>$/.test(singleLine)){
+        //         //结尾
+        //         areaTypes.push('html_end')
+        //         scanedLines.push(singleLine)
+        //     }else{
+        //         //开头
+        //         areaTypes.push('html_start')
+        //         scanedLines.push(singleLine)
+        //     }
+        // }
         else{
             areaTypes.push('other')
             scanedLines.push(singleLine)
         }
     }
+    // areaTypes.forEach((v, i) => {
+    //     console.log(v + '-->' + scanedLines[i])
+    // })
+    // console.log('----')
     //本函数的第二次 scan
     let isCodeArea = false, isCommentArea = false, isHtmlArea = false;
     areaTypes.push('other')
@@ -125,6 +140,12 @@ function scanArea (mdLines) {
     const ulAndCtx = (line) => line.length >=2 &&
         (ulRegexp.test(line.substring(0, 2))
         || listCtxRegexp.test(line) || listCtxRegexp.test(line.replace(/^\s{2}/,'')));
+    // const unSafeBorder = (line) => {
+    //     firstLetter = line.trim()[0];
+    //     return firstLetter == '>' || firstLetter == '|' 
+    //     || firstLetter == '`' || firstLetter == '!' 
+    //     || firstLetter == '#' || firstLetter == '[';
+    // }
     const unSafeBorder = (line) => {
         firstLetter = line.trim()[0];
         return firstLetter == '|'
@@ -165,6 +186,18 @@ function scanArea (mdLines) {
             scanedLines.push(singleLine);
             continue;
         }
+        // if(lastAreaTypes[i] == 'html_start'){
+        //     isHtmlArea = true;
+        //     areaTypes.push('html_start');
+        //     scanedLines.push(singleLine);
+        //     continue;
+        // }
+        // if(lastAreaTypes[i] == 'html_end'){
+        //     isHtmlArea = false;
+        //     areaTypes.push('html_end');
+        //     scanedLines.push(singleLine);
+        //     continue;
+        // }
         //本次 scan 的行不在 code area 与 comment area中
         if(!isCodeArea && !isCommentArea){
             //由于会出现列表上下文中的代码区
@@ -208,6 +241,14 @@ function scanArea (mdLines) {
                 areaTypes.push('other', 'ol_end');
                 scanedLines.push(singleLine, '');
             }
+            // else if(olAndCtx(singleLine)
+            // && olAndCtx(lastLine)
+            // && ((!olAndCtx(nextLine) && !ul(nextLine)) || (ol(nextLine) && liCtx(singleLine)) || (ul(nextLine) && !inUlCtx))
+            // && (!unSafeBorder(singleLine) || olAndCtx(nextLine) || (titleRegexp.exec(nextLine) && !inUlCtx))){
+            //     inOlCtx = false;
+            //     areaTypes.push('other', 'ol_end');
+            //     scanedLines.push(singleLine, '');
+            // }
             //判断是否为无序列表区
             else if((ul(singleLine) && !ul(lastLine) && !ulAndCtx(nextLine))
             || (ul(singleLine) && !ul(lastLine) && ul(nextLine) && liCtx(NextLine))){
@@ -231,6 +272,14 @@ function scanArea (mdLines) {
                 areaTypes.push('other', 'ul_end');
                 scanedLines.push(singleLine, '');
             }
+            // else if(ulAndCtx(singleLine)
+            // && ulAndCtx(lastLine)
+            // && ((!ulAndCtx(nextLine) && !ol(nextLine)) || (ul(nextLine) && liCtx(singleLine)) || (ol(nextLine) && !inOlCtx))
+            // && (!unSafeBorder(singleLine) || ulAndCtx(nextLine) || (titleRegexp.exec(nextLine) && !inOlCtx))){
+            //     inUlCtx = false;
+            //     areaTypes.push('other', 'ul_end');
+            //     scanedLines.push(singleLine, '');
+            // }
             //判断是否为表格区
             else if((singleLine.length >= 3
             && singleLine[0] == '|' && singleLine[singleLine.length - 1] == '|')
@@ -264,6 +313,11 @@ function scanArea (mdLines) {
     }
     areaTypes.push('other');
     scanedLines.push('');
+
+    // areaTypes.forEach((v, i) => {
+    //     console.log(v + '-->' + scanedLines[i])
+    // })
+    // console.log('----')
     
     return {
         areaTypes,
@@ -353,7 +407,11 @@ function scanLineType (md){
                         currentList.startIndex = i;
                     }
                     //只过滤首行
+                    // scanedLines[i] = singleLine.substring(singleLine.indexOf('.') + 1);
+                    // console.log(singleLine)
+                    // if(liCtx(singleLine))
                     scanedLines[i] = /^\d{1,2}\./.test(singleLine) ? singleLine.substring(singleLine.indexOf('.') + 1).trim() : singleLine.replace(olCtxRegexp, '');
+                    // scanedLines[i] = i > currentList.startIndex ?  singleLine.trim() : singleLine.substring(singleLine.indexOf('.') + 1).trim();
                     areaTypes[i] = /^\d{1,2}\./.test(singleLine) ? 'ol_line' : 'other';
                 }
                 else if(typeOfThisLine == 'ul_start'){
@@ -373,7 +431,9 @@ function scanLineType (md){
                         currentList.startIndex = i;
                     }
                     //只过滤首行，考虑嵌套的问题
+                    // scanedLines[i] = singleLine.replace(/^[\*\-+]\s/, '').trim();
                     scanedLines[i] = ul(singleLine) ? singleLine.replace(/^[\*\-+]\s/, '').trim() : singleLine.replace(ulCtxRegexp, '');
+                    // scanedLines[i] = i > currentList.startIndex ? singleLine.trim() : singleLine.replace(/^[\*\-+]\s/, '').trim();
                     areaTypes[i] = ul(singleLine) ? 'ul_line' : 'other';
                     
                 }
@@ -434,6 +494,11 @@ function scanLineType (md){
             }
         }
     }
+    // console.log('xxxx')
+    // areaTypes.forEach((v, i) => {
+    //     console.log(v + '-->' + scanedLines[i])
+    // })
+    // console.log('xxxx')
     //处理引用区
     while(quotes.length){
         let { startIndex, endIndex } = quotes.pop();
@@ -443,11 +508,19 @@ function scanLineType (md){
         let hani = result.areaTypes.length - range;
         areaTypes.splice(startIndex, range, ...result.areaTypes);
         scanedLines.splice(startIndex, range, ...result.scanedLines);
+
+        // console.log('经过处理之后的引用区')
+        // console.log(hani)
+        // areaTypes.forEach((v, i) => {
+        //     console.log(v + '-->' + scanedLines[i])
+        // })
         //重新设置表格下标
         result.tables.forEach(table => {
             table.startIndex += startIndex;
             table.endIndex += startIndex;
         });
+        // console.log(tables)
+        // console.log(startIndex + '' + endIndex)
         tables.forEach(table => {
             let tableStartIndex = table.startIndex,
                 tableEndIndex = table.endIndex;
@@ -470,17 +543,27 @@ function scanLineType (md){
         })
     }
     //处理列表区
+    // lists.forEach(list => {
+    //     let { startIndex, endIndex } = list;
+    //     console.log(startIndex, endIndex);
+    // })
+    // console.log(lists)
     while(lists.length){
         let { startIndex, endIndex } = lists.pop();
+        // console.log(lists)
         let range = endIndex - startIndex;
+        // console.log('这是处理列表区的内容')
         //判断是否有连续的 ul_line 或 ol_line
         let inHani = {
             areaTypes : areaTypes.slice(startIndex, endIndex)
         }
         let continuousListLine = hasContinuousListLine(inHani);
+        // console.log(continuousListLine);
         //针对范围内的列表行进行判断
         //什么时候会出现多个 continuousListLine --> 没有拆分整个 areaTypes 的时候
         //所以现在对区域进行了拆分 理论上不会出现多个 continuousListLine
+        // console.log(range)
+        // console.log(inHani)
         if(continuousListLine.length && ((continuousListLine[0][1] - continuousListLine[0][0] + 1) == range)){
             //有连续 ul_line 或 ol_line
             continuousListLine.forEach(v => {
@@ -521,7 +604,59 @@ function scanLineType (md){
                 }
             });
             tables = [...tables, ...result.tables];
-        }    
+        }
+
+        // console.log(continuousListLine)
+        // if(continuousListLine.length){
+
+        // }
+
+           
+        // let continuousListLine = hasContinuousListLine({areaTypes});
+        // if(continuousListLine.length){
+        //     //有连续 ul_line 或 ol_line
+        //     continuousListLine.forEach(v => {
+        //         let lineStartIndex = v[0], lineEndIndex = v[1];
+        //         let oldType = areaTypes.slice(lineStartIndex, lineEndIndex + 1);
+        //         //并不改变数组长度
+        //         areaTypes.splice(lineStartIndex, lineEndIndex - lineStartIndex + 1, ...oldType.map(v => v.replace('line', 'lines')));
+        //     })
+        //     let old = {areaTypes, scanedLines};
+        //     result.areaTypes = comListLines(old, result);
+        //     areaTypes.splice(startIndex, range, ...result.areaTypes);
+        //     scanedLines.splice(startIndex, range, ...result.scanedLines);
+        // }
+        // else{
+            
+        //     hani += 2;
+            
+
+        //     // console.log('LLLL')
+        //     // areaTypes.forEach((v, i) => {
+        //     //     console.log(v + '-->' + scanedLines[i])
+        //     // })
+        //     // console.log('LLLL')
+            
+        // }
+
+        // let hani = result.areaTypes.length - range + 2;
+        // //加二是因为要在每次替换时留一个 list 钩子
+        // result.areaTypes.unshift('li_hook_start');
+        // result.scanedLines.unshift('');
+        // result.areaTypes.push('li_hook_end');
+        // result.scanedLines.push('');
+
+        // let old = {areaTypes, scanedLines};
+        // result.areaTypes = comListLines(old, result);
+        // areaTypes.splice(startIndex, range, ...result.areaTypes);
+        // scanedLines.splice(startIndex, range, ...result.scanedLines);
+
+        // console.log('----')
+        // areaTypes.forEach((v, i) => {
+        //     console.log(v + '-->' + scanedLines[i])
+        // })
+        // console.log('----')
+        
     }
 
     return {
@@ -532,7 +667,15 @@ function scanLineType (md){
 }
 //第三次 scan 将每行 markdown 转成 html 并将其存为 json file
 function toJsonFile(md, mdFileName, jsonDirName, mdDirName){
+    console.log(mdFileName)
     let {areaTypes, scanedLines, tables} = md;
+
+    // console.log('-------')
+    // areaTypes.forEach((v, i) => {
+    //     console.log(v + '-->' + scanedLines[i])
+    // })
+    // console.log('-------')
+    // tables.forEach(v => console.log(v))
 
     let comment = {};  //注释对象
     let summary = {};  //总结对象
@@ -630,6 +773,12 @@ function toJsonFile(md, mdFileName, jsonDirName, mdDirName){
             scanedLines[i] = '</tbody></table>'
         }
     }
+    //代码区内容处理
+    // console.log('-------')
+    // areaTypes.forEach((v, i) => {
+    //     console.log(v + '-->' + scanedLines[i])
+    // })
+    // console.log('-------')
     //表格区对齐处理
     while(tables.length){
         let alignRegexp = /align(?!=)/;
@@ -642,6 +791,12 @@ function toJsonFile(md, mdFileName, jsonDirName, mdDirName){
             scanedLines[currentTable.startIndex + 2 + index] = tableLine;
         });
     }
+
+    // console.log('-------')
+    // areaTypes.forEach((v, i) => {
+    //     console.log(v + '-->' + scanedLines[i])
+    // })
+    // console.log('-------')
     //抽取每篇文章的摘要部分
     summary.content = scanedLines.slice(0, summary.slicePoint).filter(line => line.length);
     scanedLines = scanedLines.slice(summary.slicePoint);
