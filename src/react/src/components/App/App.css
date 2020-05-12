@@ -1,0 +1,12 @@
+#app{
+    position: relative;
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+}
+#container{
+    position: relative;
+    padding: 75px 0 0 0;
+    background-color: #fff;
+    overflow: auto;
+}

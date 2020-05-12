@@ -1,0 +1,34 @@
+{
+  "name": "xve",
+  "version": "1.0.0",
+  "description": "A Hexo-like blog and SPA generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C1erman/xve.git"
+  },
+  "bin": {
+    "xve": "./bin/xve-cli.js"
+  },
+  "keywords": [
+    "SPA",
+    "react",
+    "blog",
+    "markdown",
+    "cli"
+  ],
+  "author": "c1er",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/C1erman/xve/issues"
+  },
+  "homepage": "https://github.com/C1erman/xve#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "commander": "^5.1.0",
+    "shelljs": "^0.8.4"
+  }
+}

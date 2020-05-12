@@ -1,0 +1,36 @@
+.footer-wrapper{
+    width: 100%;
+    max-width: 1440px;
+    background-color: #1a1a1a;
+    overflow: hidden;
+    color: white;
+}
+.copyright{
+    width: 400px;
+    margin: 15px auto;
+    text-align: center;
+    text-overflow: ellipsis;
+}
+.powered-by{
+    width: 300px;
+    margin: 10px auto;
+    text-align: center;
+    text-overflow: ellipsis;
+}
+.powered-by > a {
+    margin: 0 5px;
+    color: white;
+    border-bottom: 1px solid white;
+}
+.division{
+    width: 80%;
+    height: 1px;
+    margin: 10px auto;
+    background-color: #eee;
+}
+.custom{
+    width: 300px;
+    margin: 10px auto;
+    text-align: center;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,52 @@
+.right-bar{
+    position: fixed;
+    width: 100%;
+    max-width: 1440px;
+    transform: translate3d(0, 0, 0);
+    top: 0;
+    z-index: 9;
+}
+.right-bar-wrapper{
+    position: fixed;
+    top: 270px;
+    left: 900px;
+    width: 200px;
+    border-left: 5px solid black;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+.right-bar-main{
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: bolder;
+}
+.right-bar-ul{
+    max-height: 500px;
+    overflow-y: auto;
+    margin-left: 10px;
+    line-height: 1.8;
+}
+.right-bar-ul > li{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    user-select: none;
+}
+.right-bar-ul > li.li3{
+    margin-left: 0.8em;
+}
+.right-bar-ul > li.li4{
+    margin-left: 1.6em;
+}
+.right-bar-ul > li.li5{
+    margin-left: 2.4em;
+}
+.right-bar-ul > li.li6{
+    margin-left: 3.2em;
+}
+.right-bar-ul > li.right-bar-light{
+    color: firebrick;
+    text-shadow: firebrick;
+}

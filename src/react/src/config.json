@@ -1,0 +1,10 @@
+{
+    "title" : "Anything",
+    "themeColor" : "#0084ff",
+    "jsonPath" : "./json/source.json",
+    "deploy" : {
+        "type" : "git",
+        "repo" : "git@",
+        "branch" : "master"
+    }
+}

@@ -1,0 +1,24 @@
+.to-top{
+    position: fixed;
+    width: 100%;
+    max-width: 1440px;
+    transform: translate3d(0, 0, 0);
+    bottom: 0;
+    z-index: 9;
+}
+.to-top-arrow{
+    position: fixed;
+    display: none;
+    border-radius: 20px;
+    font-size: 25px;
+    right: 40px;
+    bottom: 150px;
+    cursor: pointer;
+}
+
+.to-top-arrow::before{
+    content: '▲';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}

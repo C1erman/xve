@@ -1,0 +1,59 @@
+.paging-controller{
+    display: flex;
+    margin: 65px 0 20px;
+    user-select: none;
+    justify-content: center;
+}
+.paging-prev, .paging-next{
+    margin-right: 8px;
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-weight: 500;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+    outline: none;
+}
+.paging-prev > a::before, .paging-next > a::before{
+    background-image: url("./paging-arrow.png");
+    background-size: 72px 48px;
+    text-indent: -9999px;
+}
+.paging-prev > a::before{
+    content: '\2039';
+    display: block;
+    background-position: -24px 0;
+}
+.paging-next > a::before{
+    content: '\203A';
+    display: block;
+    background-position: -24px -24px;
+}
+.paging-prev-disabled > a::before{
+    background-position: 0 0;
+}
+.paging-prev-disabled > a{
+    cursor: not-allowed;
+}
+.paging-next-disabled > a::before{
+    background-position: -48px -24px;
+}
+.paging-next-disabled > a{
+    cursor: not-allowed;
+}
+.paging-item{
+    margin-right: 8px;
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-weight: 500;
+    background-color: #fff;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+    outline: none;
+}
+.paging-item-active > a{
+    color: #0084ff;
+}
