@@ -667,7 +667,7 @@ function scanLineType (md){
 }
 //第三次 scan 将每行 markdown 转成 html 并将其存为 json file
 function toJsonFile(md, mdFileName, jsonDirName, mdDirName){
-    console.log(mdFileName)
+    console.log(mdFileName + '  parse completed.');
     let {areaTypes, scanedLines, tables} = md;
 
     // console.log('-------')

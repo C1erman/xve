@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     // 异步 dispatch
+    // let jsonUrl = './json/source.json';  //可配置项
     let jsonUrl = config.jsonPath;  //可配置项
     return {
         getBlogSource : () => dispatch(getBlogSource(jsonUrl))
@@ -39,7 +40,7 @@ class Blog extends Component{
         getBlogSource();
     }
     componentWillUnmount(){
-        localStorage.removeItem('currentPage')
+        // localStorage.removeItem('currentPage')
     }
     static getDerivedStateFromProps(props, state){
         let { blog } = props;

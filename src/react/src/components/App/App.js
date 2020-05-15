@@ -10,8 +10,13 @@ import './App.css';
 //redux
 import { Provider } from 'react-redux';
 import store from '../../reducers/index';
+//config.js
+import config from '../../config.json';
 
 export default class App extends Component{
+    componentDidMount(){
+        document.title = config.title;
+    }
     render(){
         return (
             <Provider store={store}>
@@ -23,7 +28,6 @@ export default class App extends Component{
                             <Route exact path='/blog' component={Blog} />
                             <Route path='/blog/:id' component={BlogDetail} />
                         </Switch>
-                        <Route path='/about' component={''} />
                     </div>
                     <Footer />
                 </Router>

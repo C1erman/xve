@@ -28,7 +28,8 @@ const RightBar = ({anchors, container}) => {
                     {anchors.map((anchor, index) => {
                         let {id, level, text} = anchor;
                         return (
-                            <li key={id + index} data-id={id} className={'li' + level} onClick={() => { scrollToAnchor(id, container, config) }}>{text}</li>
+                            <li key={id + index} data-id={id} className={'li' + level} onClick={() => { scrollToAnchor(id, container, config) }}
+                                dangerouslySetInnerHTML={{__html:text}}></li>
                         );
                     })}
                 </ul>

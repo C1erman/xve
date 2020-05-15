@@ -44,7 +44,7 @@
     transition: color .2s;
 }
 .links > a:hover{
-    color: #0084ff;
+    color: rgb(18, 150, 219);
 }
 .links > a.active{
     font-weight: bolder;

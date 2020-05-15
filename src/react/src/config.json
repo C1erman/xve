@@ -1,10 +1,18 @@
 {
-    "title" : "Anything",
-    "themeColor" : "#0084ff",
+    "title" : "归人的知识笔记",
     "jsonPath" : "./json/source.json",
     "deploy" : {
         "type" : "git",
         "repo" : "git@",
         "branch" : "master"
-    }
+    },
+    "homePageSelf" : "归人",
+    "homePageText" : ["来自成都的前端工程师，喜好健身与读史","会一点日语，N2の書証を取りました",
+        "愿望是能够学会钢琴与绘画","xve是一个类Hexo的博客框架","提供从MD文件到博客平台的解决方案，其实现的功能如下所述",
+        "文件解析：解析markdown文件","内容展示：生成SPA并展示其内容","全局配置：暴漏config.json供自定义","打包推送：可推送至Github作为Github Pages"],
+    "showPower" : true,
+    "showCopyRight" : true,
+    "footerFromTime" : 2017,
+    "footerCustom" : "<del>铁甲依然在你妹</del>",
+    "footerCopyRight" : "Made With Love"
 }

@@ -1,32 +1,23 @@
 import React, { Component } from "react";
-import Carousel from '../Carousel/Carousel'; 
 import './Home.css';
+import homeImg from '../../icon/home.png';
+//config.json
+import config from '../../config.json';
 
 export default class Home extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            imgs : [
-                {
-                    linkTo : '',
-                    src : 'https://i.loli.net/2020/01/02/BntKIuELhfayeJG.jpg'
-                },
-                {
-                    linkTo : '',
-                    src : 'https://i.loli.net/2020/01/02/BntKIuELhfayeJG.jpg'
-                },
-                {
-                    linkTo : '',
-                    src : 'https://i.loli.net/2020/01/02/BntKIuELhfayeJG.jpg'
-                }
-            ]
-        }
-    }
     render(){
         return (
             <div className='home-wrapper'>
+                <img className='home-img' alt='首页封面图' src={homeImg} />
                 <div className='home-content'>
-                    <Carousel imgs={this.state.imgs} config={{height : '300px'}} />
+                    <div className='home-self'>
+                        {config.homePageSelf}
+                    </div>
+                    <div className='home-text'>
+                        {config.homePageText.map((text, index) => 
+                            <div key={text} style={{textAlign: index % 2 ? 'left' : 'right'}} className='home-text-item'>{text}</div>
+                        )}
+                    </div>
                 </div>
             </div>
         );

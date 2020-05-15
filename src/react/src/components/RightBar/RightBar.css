@@ -9,8 +9,8 @@
 .right-bar-wrapper{
     position: fixed;
     top: 270px;
-    left: 900px;
-    width: 200px;
+    left: 880px;
+    width: 220px;
     border-left: 5px solid black;
     padding-left: 10px;
     border-radius: 5px;
@@ -47,6 +47,6 @@
     margin-left: 3.2em;
 }
 .right-bar-ul > li.right-bar-light{
-    color: firebrick;
-    text-shadow: firebrick;
+    color: rgb(18, 150, 219);
+    text-shadow: rgb(18, 150, 219);
 }

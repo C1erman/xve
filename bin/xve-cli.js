@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander');
 
+program.version('1.2.0').description('xve cli.');
 program
     .command('init')
     .alias('i')

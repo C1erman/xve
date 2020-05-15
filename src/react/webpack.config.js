@@ -17,9 +17,10 @@ module.exports = {
             {
                 test : /\.(png|svg|jpg|gif)$/,  //解析图像
                 use : {
-                    loader : 'file-loader',
+                    loader : 'url-loader',
                     options : {
-                        publicPath : '../'  //图像引用路径
+                        limit : 8192,
+                        name : '[hash:4].[ext]'
                     }
                 }
             },
@@ -42,6 +43,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             //指明用哪个HTML作为挂载模板
             template : './src/index.html',
+            favicon : './src/icon/favicon.ico',
             hash : true
         }),
         //将拆分后的CSS放置在dist/css/style.css
@@ -56,7 +58,7 @@ module.exports = {
         open : true,  //是否打开浏览器
         hot : true  //开启热更新
     },  //开发服务器配置
-    mode : 'production',  //模式
+    mode : 'development',  //模式
     resolve : {
         extensions : ['.js', '.json', '.css']
     },  //配置别名、省略后缀名

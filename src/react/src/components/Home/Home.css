@@ -1,0 +1,27 @@
+.home-wrapper{
+    user-select: none;
+}
+.home-img{
+    width: 100%;
+    max-width: 1440px;
+    border: none !important;
+    border-radius: 0 !important;
+}
+.home-self{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-indent: 1em;
+    font-weight: bolder;
+    font-size: 120px;
+}
+.home-text{
+    overflow: auto;
+}
+.home-text-item{
+    margin: 50px 50px 0 50px;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 1.2;
+    font-family: 'Lato', Microsoft YaHei;
+}

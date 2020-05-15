@@ -9,6 +9,7 @@ function getDefaultMarkdown(fileName){
         `date: ${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
         '---',
         '',
+        '',
         '<!--more-->',
         ''
     ]
@@ -17,7 +18,7 @@ function newPost(fileName){
     shell.cd('./src/md');
     let mdFileName = fileName + '.md';
     if(existsSync(mdFileName)){
-        shell.echo('This post has already exist.');
+        shell.echo('This post has already exist, change a name.');
         shell.exit(2);
     }
     else{

@@ -6,7 +6,7 @@ const delFolderSync = require('./delFolder')
 const delOtherFile = require('./delOtherFile');
 
 let mdDirName = '../md/'
-let jsonDirName = '../json/'
+let jsonDirName = '../../public/json/'
 let sourceFileName = 'source.json'
 
 //清空文件夹

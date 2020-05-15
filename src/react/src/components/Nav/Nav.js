@@ -18,8 +18,6 @@ export default class Nav extends Component{
                     <div className='links'>
                         <NavLink exact to='/'>首页</NavLink>
                         <NavLink to='/blog'>博客</NavLink>
-                        <NavLink to='/about'>关于我的事</NavLink>
-                        <NavLink to='/talking'>闲言碎语</NavLink>
                     </div>
                 </div>
             </div>

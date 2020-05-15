@@ -4,6 +4,8 @@ import { handleBlogDetail } from '../../reducers/data'
 import { slideUp } from '../../tool/slideUp';
 import RightBar from '../RightBar/RightBar';
 import './BlogDetail.css';
+//config.js
+import config from '../../config.json';
 
 const mapStateToProps = (state) => {
     return {
@@ -12,7 +14,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     // 异步 dispatch
-    let jsonUrl = './json/source.json';  //可配置项
+    let jsonUrl = config.jsonPath;  //可配置项
+    // let jsonUrl = './json/source.json';  //可配置项
     return {
         getBlogById : (id) => dispatch(handleBlogDetail(jsonUrl, id))
     }

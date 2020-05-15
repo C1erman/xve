@@ -1,9 +1,16 @@
 .footer-wrapper{
     width: 100%;
     max-width: 1440px;
-    background-color: #1a1a1a;
     overflow: hidden;
     color: white;
+    background-color: #1a1a1a;
+}
+.footer-wrapper > svg{
+    background-color: white;
+}
+.footer-other{
+    overflow: auto;
+    background-color: #1a1a1a;
 }
 .copyright{
     width: 400px;
